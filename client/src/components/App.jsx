@@ -8,7 +8,7 @@ class App extends React.Component {
 
     this.state = {
       movies: props.movies,
-      moviesTemp: props.movies
+      visibleMovies: props.movies
     }
 
     this.showMatches = this.showMatches.bind(this);
@@ -39,7 +39,7 @@ class App extends React.Component {
 
     if (movieMatches.length) {
       this.setState({
-        moviesTemp: movieMatches
+        visibleMovies: movieMatches
       });
     } else {
       // we need to push "No movie by that name found  at some point" at some point
@@ -53,7 +53,7 @@ class App extends React.Component {
       movies.push(movie);
       this.setState({
         movies: movies,
-        moviesTemp: movies,
+        visibleMovies: movies,
       });
     }
   }
@@ -63,7 +63,7 @@ class App extends React.Component {
       <div>
         <SearchForm searchHandler={this.addMovie} btnTxt='Add' btnPlaceholder='Add movie title here'/>
         <SearchForm searchHandler={this.showMatches} btnTxt='Go!' btnPlaceholder='Search...'/>
-        <MovieList movies={this.state.moviesTemp} />
+        <MovieList movies={this.state.visibleMovies} />
       </div>
     );
   }

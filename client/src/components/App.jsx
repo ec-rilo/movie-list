@@ -1,6 +1,7 @@
 import React from 'react';
 import MovieList from './MovieList.jsx';
 import SearchForm from './SearchForm.jsx';
+import CategoryBtnContainer from './CategoryBtnContainer.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -27,6 +28,7 @@ class App extends React.Component {
     this.addMovie = this.addMovie.bind(this);
     this.toggleWatched = this.toggleWatched.bind(this);
     this.createMovieId = this.createMovieId.bind(this);
+    this.updateVisibleMovies = this.updateVisibleMovies.bind(this);
   }
 
   createMovieId() {
@@ -97,16 +99,25 @@ class App extends React.Component {
     }
 
     this.setState({
-      movies
+      movies,
+    });
+  }
+
+  updateVisibleMovies(movies) {
+    this.setState({
+      visibleMovies: movies
     });
   }
 
   render() {
     return (
       <div>
-        <SearchForm searchHandler={this.addMovie} btnTxt='Add' btnPlaceholder='Add movie title here'/>
-        <SearchForm searchHandler={this.showMatches} btnTxt='Go!' btnPlaceholder='Search...'/>
-        <MovieList movies={this.state.visibleMovies} watchHandler={this.toggleWatched}/>
+        <SearchForm searchHandler={this.addMovie} btnTxt='Add' btnPlaceholder='Add movie title here' />
+        <div className='movie-list-header'>
+          <CategoryBtnContainer movies={this.state.movies} updateVisibleMovies={this.updateVisibleMovies}/>
+          <SearchForm searchHandler={this.showMatches} btnTxt='Go!' btnPlaceholder='Search...' />
+        </div>
+        <MovieList movies={this.state.visibleMovies} watchHandler={this.toggleWatched} />
       </div>
     );
   }

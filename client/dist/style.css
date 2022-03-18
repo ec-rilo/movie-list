@@ -9,6 +9,7 @@ body {
 /* Movie List */
 
 .movie-list {
+  box-sizing: border-box;
   border-top: 1px solid #c4c4c4;
   border-left: 1px solid #c4c4c4;
   border-right: 1px solid #c4c4c4;
@@ -33,4 +34,28 @@ body {
 .watch-btn.active {
   background-color: var(--clr-green);
   color: white;
+}
+
+.movie-list-header {
+  display: flex;
+  align-items: center;
+  width: 500px;
+}
+
+.movie-list-header .search-form {
+  margin: 0 0 0 10px;
+}
+
+.category-btn {
+  height: 50px;
+  width: 100px;
+}
+
+.category-btn.active {
+  background-color: var(--clr-green);
+  color: white;
+}
+
+.category-btn {
+  cursor: pointer;
 }

@@ -21,8 +21,8 @@ class SearchForm extends React.Component {
         e.preventDefault();
         this.props.searchHandler(this.state.text);
       }}>
-        <input type='text' placeholder='Search...' onChange={(e) => this.updateText(e.target.value)}/>
-        <button type='submit'>Go!</button>
+        <input type='text' placeholder={this.props.btnPlaceholder} onChange={(e) => this.updateText(e.target.value)}/>
+        <button type='submit'>{this.props.btnTxt}</button>
       </form>
     );
   }

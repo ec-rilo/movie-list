@@ -12,6 +12,12 @@ class App extends React.Component {
     }
 
     this.showMatches = this.showMatches.bind(this);
+    this.createMovie = this.createMovie.bind(this);
+    this.addMovie = this.addMovie.bind(this);
+  }
+
+  createMovie(movieTitle) {
+    return { title: movieTitle};
   }
 
   showMatches(text) {
@@ -40,11 +46,23 @@ class App extends React.Component {
     }
   }
 
+  addMovie(movieTitle) {
+    if (movieTitle && typeof movieTitle === 'string') {
+      let movie = this.createMovie(movieTitle);
+      const movies = this.state.movies;
+      movies.push(movie);
+      this.setState({
+        movies: movies,
+        moviesTemp: movies,
+      });
+    }
+  }
 
   render() {
     return (
       <div>
-        <SearchForm searchHandler={this.showMatches} />
+        <SearchForm searchHandler={this.addMovie} btnTxt='Add' btnPlaceholder='Add movie title here'/>
+        <SearchForm searchHandler={this.showMatches} btnTxt='Go!' btnPlaceholder='Search...'/>
         <MovieList movies={this.state.moviesTemp} />
       </div>
     );

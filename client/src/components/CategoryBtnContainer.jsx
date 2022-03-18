@@ -13,30 +13,6 @@ class CategoryBtnContainer extends React.Component {
 
     this.showToWatchedMovies = this.showToWatchedMovies.bind(this);
     this.showWatchedMovies = this.showWatchedMovies.bind(this);
-    this.filterWatchedMovies = this.filterWatchedMovies.bind(this);
-    this.filterToWatchMovies = this.filterToWatchMovies.bind(this);
-  }
-
-  filterWatchedMovies() {
-    let movies = this.props.movies.slice();
-    movies = movies.filter((movie) => {
-      if (movie.watched === true) {
-        return movie;
-      }
-    });
-
-    return movies;
-  }
-
-  filterToWatchMovies() {
-    let movies = this.props.movies.slice();
-    movies = movies.filter((movie) => {
-      if (movie.watched === false) {
-        return movie;
-      }
-    });
-
-    return movies;
   }
 
   showToWatchedMovies() {
@@ -52,7 +28,7 @@ class CategoryBtnContainer extends React.Component {
       });
     }
 
-    let movies = this.filterToWatchMovies();
+    let movies = this.props.filterToWatchMovies();
     this.props.updateVisibleMovies(movies);
   }
 
@@ -69,7 +45,7 @@ class CategoryBtnContainer extends React.Component {
       });
     }
 
-    let movies = this.filterWatchedMovies();
+    let movies = this.props.filterWatchedMovies();
     this.props.updateVisibleMovies(movies);
   }
 

@@ -29,6 +29,30 @@ class App extends React.Component {
     this.toggleWatched = this.toggleWatched.bind(this);
     this.createMovieId = this.createMovieId.bind(this);
     this.updateVisibleMovies = this.updateVisibleMovies.bind(this);
+    this.filterWatchedMovies = this.filterWatchedMovies.bind(this);
+    this.filterToWatchMovies = this.filterToWatchMovies.bind(this);
+  }
+
+  filterWatchedMovies() {
+    let movies = this.state.movies.slice();
+    movies = movies.filter((movie) => {
+      if (movie.watched === true) {
+        return movie;
+      }
+    });
+
+    return movies;
+  }
+
+  filterToWatchMovies() {
+    let movies = this.state.movies.slice();
+    movies = movies.filter((movie) => {
+      if (movie.watched === false) {
+        return movie;
+      }
+    });
+
+    return movies;
   }
 
   createMovieId() {
@@ -91,15 +115,22 @@ class App extends React.Component {
 
   toggleWatched(movieId) {
     const movies = this.state.movies.slice();
+    let movie;
     for (let i = 0; i < movies.length; i++) {
       if (movies[i].id === movieId) {
         movies[i].watched = !movies[i].watched;
+        movie = movies[i];
         break;
       }
     }
 
+    let filter;
+    movie.watched ? filter = this.filterToWatchMovies : filter = this.filterWatchedMovies;
+    const filteredMovies = filter();
+
     this.setState({
       movies,
+      visibleMovies: filteredMovies
     });
   }
 
@@ -114,7 +145,11 @@ class App extends React.Component {
       <div>
         <SearchForm searchHandler={this.addMovie} btnTxt='Add' btnPlaceholder='Add movie title here' />
         <div className='movie-list-header'>
-          <CategoryBtnContainer movies={this.state.movies} updateVisibleMovies={this.updateVisibleMovies}/>
+          <CategoryBtnContainer
+          updateVisibleMovies={this.updateVisibleMovies}
+          filterWatchedMovies={this.filterWatchedMovies}
+          filterToWatchMovies={this.filterToWatchMovies}
+          />
           <SearchForm searchHandler={this.showMatches} btnTxt='Go!' btnPlaceholder='Search...' />
         </div>
         <MovieList movies={this.state.visibleMovies} watchHandler={this.toggleWatched} />

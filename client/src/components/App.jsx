@@ -7,7 +7,9 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      movies: props.movies.map((movie) => {
+      counter: props.movies.length - 1,
+      movies: props.movies.map((movie, index) => {
+        movie.id = index;
         movie.watched = false,
         movie.watchedVisible = true
         return movie;
@@ -23,10 +25,22 @@ class App extends React.Component {
     this.showMatches = this.showMatches.bind(this);
     this.createMovie = this.createMovie.bind(this);
     this.addMovie = this.addMovie.bind(this);
+    this.toggleWatched = this.toggleWatched.bind(this);
+    this.createMovieId = this.createMovieId.bind(this);
+  }
+
+  createMovieId() {
+    let oldCount = this.state.counter;
+    oldCount += 1;
+    this.setState({
+      counter: oldCount
+    });
+    return oldCount;
   }
 
   createMovie(movieTitle, watchVisible = true) {
-    return { title: movieTitle, watched: false, watchedVisible: watchVisible};
+    const id = this.createMovieId();
+    return { id: id, title: movieTitle, watched: false, watchedVisible: watchVisible};
   }
 
   showMatches(text) {
@@ -59,6 +73,8 @@ class App extends React.Component {
   }
 
   addMovie(movieTitle) {
+    console.log(this.state.counter);
+    console.log(this.state.movies);
     if (movieTitle && typeof movieTitle === 'string') {
       let movie = this.createMovie(movieTitle);
       const userMovies = this.state.userMovies;
@@ -71,6 +87,10 @@ class App extends React.Component {
         visibleMovies: userMovies,
       });
     }
+  }
+
+  toggleWatched() {
+
   }
 
   render() {

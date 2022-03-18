@@ -43,7 +43,10 @@ class App extends React.Component {
         visibleMovies: movieMatches
       });
     } else {
-      // we need to push "No movie by that name found  at some point" at some point
+      let errMovie = this.createMovie('No movie by that name found.');
+      this.setState({
+        visibleMovies: [errMovie]
+      });
     }
   }
 

@@ -1,3 +1,21 @@
 body {
   font-family: sans-serif, arial;
 }
+
+/* Movie List */
+
+.movie-list {
+  border-top: 1px solid #c4c4c4;
+  border-left: 1px solid #c4c4c4;
+  border-right: 1px solid #c4c4c4;
+  width: 500px;
+}
+
+.movie {
+  border-bottom: 1px solid #c4c4c4;
+  padding: 30px 30px 30px 50px;
+}
+
+.search-form {
+  margin-bottom: 30px;
+}

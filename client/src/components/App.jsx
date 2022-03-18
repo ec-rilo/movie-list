@@ -8,7 +8,8 @@ class App extends React.Component {
 
     this.state = {
       movies: props.movies,
-      visibleMovies: props.movies
+      visibleMovies: props.movies,
+      userMovies: []
     }
 
     this.showMatches = this.showMatches.bind(this);
@@ -49,11 +50,14 @@ class App extends React.Component {
   addMovie(movieTitle) {
     if (movieTitle && typeof movieTitle === 'string') {
       let movie = this.createMovie(movieTitle);
+      const userMovies = this.state.userMovies;
       const movies = this.state.movies;
       movies.push(movie);
+      userMovies.push(movie);
       this.setState({
         movies: movies,
-        visibleMovies: movies,
+        userMovies: userMovies,
+        visibleMovies: userMovies,
       });
     }
   }

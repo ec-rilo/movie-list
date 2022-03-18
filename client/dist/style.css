@@ -1,3 +1,7 @@
+:root {
+  --clr-green: #78B05C;
+}
+
 body {
   font-family: sans-serif, arial;
 }
@@ -12,10 +16,21 @@ body {
 }
 
 .movie {
+  display: flex;
+  justify-content: space-between;
   border-bottom: 1px solid #c4c4c4;
   padding: 30px 30px 30px 50px;
 }
 
 .search-form {
   margin-bottom: 30px;
+}
+
+.watch-btn:hover {
+  cursor: pointer;
+}
+
+.watch-btn.active {
+  background-color: var(--clr-green);
+  color: white;
 }

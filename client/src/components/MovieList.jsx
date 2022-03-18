@@ -1,10 +1,11 @@
 import React from 'react';
+import Movie from './Movie.jsx';
 
 const MovieList = (props) => (
   <ul className='movie-list'>
     {props.movies.map((movie, index) => {
       return (
-        <li className='movie' key={index}>{movie.title}</li>
+        <Movie key={index} movie={movie}/>
       );
     })}
   </ul>

@@ -7,8 +7,16 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      movies: props.movies,
-      visibleMovies: props.movies,
+      movies: props.movies.map((movie) => {
+        movie.watched = false,
+        movie.watchedVisible = true
+        return movie;
+      }),
+      visibleMovies: props.movies.map((movie) => {
+        movie.watched = false,
+        movie.watchedVisible = true
+        return movie;
+      }),
       userMovies: []
     }
 
@@ -17,8 +25,8 @@ class App extends React.Component {
     this.addMovie = this.addMovie.bind(this);
   }
 
-  createMovie(movieTitle) {
-    return { title: movieTitle};
+  createMovie(movieTitle, watchVisible = true) {
+    return { title: movieTitle, watched: false, watchedVisible: watchVisible};
   }
 
   showMatches(text) {

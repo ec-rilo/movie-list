@@ -142,7 +142,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className='app'>
         <SearchForm searchHandler={this.addMovie} btnTxt='Add' btnPlaceholder='Add movie title here' />
         <div className='movie-list-header'>
           <CategoryBtnContainer

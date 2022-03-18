@@ -6,6 +6,15 @@ body {
   font-family: sans-serif, arial;
 }
 
+.app {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  height: 100vh;
+  justify-content: center;
+  margin: auto;
+}
+
 /* Movie List */
 
 .movie-list {

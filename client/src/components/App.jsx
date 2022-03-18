@@ -44,7 +44,7 @@ class App extends React.Component {
   }
 
   showMatches(text) {
-    const movies = this.state.movies;
+    const movies = this.state.movies.slice();
     const movieMatches = [];
 
     movies.forEach((movie) => {
@@ -73,24 +73,32 @@ class App extends React.Component {
   }
 
   addMovie(movieTitle) {
-    console.log(this.state.counter);
-    console.log(this.state.movies);
     if (movieTitle && typeof movieTitle === 'string') {
       let movie = this.createMovie(movieTitle);
-      const userMovies = this.state.userMovies;
-      const movies = this.state.movies;
+      const userMovies = this.state.userMovies.slice();
+      const movies = this.state.movies.slice();
       movies.push(movie);
       userMovies.push(movie);
       this.setState({
-        movies: movies,
-        userMovies: userMovies,
+        movies,
+        userMovies,
         visibleMovies: userMovies,
       });
     }
   }
 
-  toggleWatched() {
+  toggleWatched(movieId) {
+    const movies = this.state.movies.slice();
+    for (let i = 0; i < movies.length; i++) {
+      if (movies[i].id === movieId) {
+        movies[i].watched = !movies[i].watched;
+        break;
+      }
+    }
 
+    this.setState({
+      movies
+    });
   }
 
   render() {
@@ -98,7 +106,7 @@ class App extends React.Component {
       <div>
         <SearchForm searchHandler={this.addMovie} btnTxt='Add' btnPlaceholder='Add movie title here'/>
         <SearchForm searchHandler={this.showMatches} btnTxt='Go!' btnPlaceholder='Search...'/>
-        <MovieList movies={this.state.visibleMovies} />
+        <MovieList movies={this.state.visibleMovies} watchHandler={this.toggleWatched}/>
       </div>
     );
   }

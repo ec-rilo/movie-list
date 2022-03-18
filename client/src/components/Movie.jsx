@@ -1,16 +1,16 @@
 import React from 'react';
 
-const WatchBtn = ({ watched}) => {
+const WatchBtn = ({ watched, watchHandler, movieId }) => {
   let classname = 'watch-btn ';
   watched ? classname += 'active' : classname +='inactive';
 
-  return <button className={classname}>Watched</button>;
+  return <button className={classname} onClick={() => watchHandler(movieId)}>Watched</button>;
 }
 
-const Movie = ({ movie }) => (
+const Movie = ({ movie, watchHandler }) => (
   <li className='movie'>
     <p>{movie.title}</p>
-    {movie.watchedVisible && <WatchBtn watched={movie.watched} />}
+    {movie.watchedVisible && <WatchBtn movieId={movie.id} watched={movie.watched} watchHandler={watchHandler}/>}
   </li>
 );
 
